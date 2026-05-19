@@ -1,0 +1,61 @@
+@startuml
+
+
+class Plataforma {
+  - nombre : String
+}
+
+abstract class Usuario {
+  - id : int
+  - nombre : String
+  - email : String
+}
+
+class Estudiante {
+  - carrera : String
+}
+
+class Propietario {
+  - telefono : String
+}
+
+class Solicitud {
+  - fecha : Date
+  - estado : String
+}
+
+class Calificacion {
+  - valor : int
+  - comentario : String
+}
+
+class Publicacion {
+  - titulo : String
+  - descripcion : String
+}
+
+class Habitacion {
+  - direccion : String
+  - precio : double
+}
+
+' 🔺 HERENCIA (triángulo)
+Usuario <|-- Estudiante
+Usuario <|-- Propietario
+
+' ◇ AGREGACIÓN (rombo vacío)
+Plataforma "1" o-- "0..*" Usuario
+
+Estudiante "1" o-- "0..*" Solicitud
+Propietario "1" o-- "0..*" Publicacion
+
+' ◆ COMPOSICIÓN (rombo lleno)
+Publicacion "1" *-- "1" Habitacion
+Solicitud "1" *-- "1" Publicacion
+
+' Relaciones normales
+Estudiante "1" -- "0..*" Calificacion
+Propietario "1" -- "0..*" Calificacion
+
+
+@enduml

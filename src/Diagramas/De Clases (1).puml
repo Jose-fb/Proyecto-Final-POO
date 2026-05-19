@@ -1,0 +1,53 @@
+@startuml
+
+' Clase abstracta Usuario
+abstract class Usuario {
+    - id : int
+    - nombre : string
+    - email : string
+}
+
+class Estudiante {
+    - carrera : string
+}
+
+class Propietario {
+    - telefono : string
+}
+
+class Plataforma {
+    - nombre : string
+}
+
+class Calificacion {
+    - valor : int
+    - comentario : string
+}
+
+class Publicacion {
+    - titulo : string
+    - descripcion : string
+}
+
+class Solicitud {
+    - fecha : Date
+    - estado : string
+}
+
+class Habitacion {
+    - direccion : string
+    - precio : double
+}
+
+' Relaciones
+Plataforma "1" -- "0..*" Usuario
+Usuario <|-- Estudiante
+Usuario <|-- Propietario
+Estudiante "1" -- "1" Calificacion
+Propietario "1" -- "1" Calificacion
+Propietario "1" -- "0..*" Publicacion
+Publicacion "1" -- "1" Habitacion
+Estudiante "0..*" -- "1" Solicitud
+Solicitud "1" -- "1" Publicacion
+
+@enduml
