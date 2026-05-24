@@ -1,0 +1,33 @@
+@startuml
+
+    left to right direction
+
+    actor Propietario as p
+    actor Estudiante as e
+    
+    package Alquiler {
+        
+        usecase "Publicar habitación" as UC1
+        usecase "Gestionar solicitudes" as UC2
+        usecase "Registrarse" as UC3
+        usecase "Iniciar sesión" as UC4
+        usecase "Buscar habitación" as UC5
+        usecase "Solicitar alquiler" as UC6
+
+    }
+
+    p -- UC3
+    p -- UC4
+
+    p -- UC1
+    p -- UC2
+
+    UC3 -- e
+    UC4 -- e
+
+    UC5 -- e
+    UC6 -- e
+
+    UC2 -- e
+
+@enduml

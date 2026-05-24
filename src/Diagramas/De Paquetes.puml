@@ -1,0 +1,111 @@
+@startuml
+
+  package Vista{
+
+    class FormEstudiante
+    class FormPropietario
+    class FormUsuario
+
+  }
+
+  package Modelo{
+
+    package Entidad{
+
+        abstract Usuario
+        class UsuarioFactory
+        class UsuarioType
+        class Estudiante
+        class Propietario
+        class Habitacion
+        class Plataforma
+        class Publicacion
+        class Solicitud
+    }
+
+    package Servicio{
+
+        class ServicioEstudiante
+        class ServicioPropietario
+        class ServicioHabitacion
+        class ServicioPublicacion
+        class ServicioSolicitud
+
+    }
+
+    package Persistencia{
+
+        class DaoEstudiante
+        class DaoPropietario
+        class DaoHabitacion
+        class DaoPublicacion
+        class DaoSolicitud
+     
+    }
+    
+}
+
+  package Control{
+
+        class ControlEstudiante
+        class ControlPropietario
+        class ControlHabitacion
+        class ControlPublicacion
+        class ControlSolicitud
+
+  }
+
+    Vista ...> Control
+    Control ...> Modelo
+
+    '======================
+
+    Usuario <|-- Estudiante
+
+    Usuario <|-- Propietario
+
+    '======================
+
+    Usuario .right.> UsuarioFactory
+
+    Usuario .left.> UsuarioType
+
+    '======================
+
+    Propietario "1" *-- "0..*" Publicacion
+
+    Publicacion "1" --* "1" Habitacion
+
+    Plataforma "1" *-- "0..*" Usuario
+
+    Plataforma "1" *-- "0..*" Solicitud
+
+    Plataforma "1" *-- "0..*" Publicacion
+
+    Estudiante "1" o-- "1" Solicitud
+
+    Publicacion "1" o-- "1" Solicitud
+
+    '======================
+
+    ServicioEstudiante *--- DaoEstudiante 
+
+    ServicioEstudiante ...> Estudiante : "Crea"
+
+    ServicioPropietario *--- DaoPropietario 
+
+    ServicioPropietario ...> Propietario : "Crea"
+
+    ServicioHabitacion *--- DaoHabitacion 
+
+    ServicioHabitacion ...> Habitacion : "Crea"
+
+    ServicioPublicacion *--- DaoPublicacion 
+
+    ServicioPublicacion ...> Publicacion : "Crea"
+
+    ServicioSolicitud *--- DaoSolicitud 
+
+    ServicioSolicitud ...> Solicitud : "Crea"
+
+@enduml

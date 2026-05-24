@@ -1,0 +1,87 @@
+@startuml
+
+    class Plataforma {
+
+        - usuarios : List<Usuario>
+        - habitaciones : List<Habitacion>
+        - publicaciones : List<Publicacion>
+        - solicitudes : List<Solicitud>
+        + gestionar() : void
+
+    }
+
+    abstract class Usuario {
+
+        - id : String
+        - nombre : String
+        - correo : String
+        - password : String
+        + login() : boolean
+
+    }
+
+    class Propietario {
+
+        - telefono : String
+        + publicar() : void
+        + editarPublicacion() : void
+
+    }
+
+    class Estudiante {
+
+        - universidad : String
+        + buscarHabitacion() : void
+        + solicitarAlquiler() : void
+
+    }
+
+    class Habitacion {
+
+        - id : String
+        - direccion : String
+        - precio : double
+        - disponible : boolean
+        + actualizarDisponibilidad() : void
+
+    }
+
+    class Publicacion {
+
+        - id : String
+        - descripcion : String
+        - fecha : Date
+        - precio : double
+        + publicar() : void
+
+    }
+
+    class Solicitud {
+
+        - id : String
+        - estado : String
+        - fecha : Date
+        + cambiarEstado() : void
+
+    }
+
+    ' ==================================================
+
+        Usuario <|-- Propietario
+        Usuario <|-- Estudiante
+
+    ' ==================================================
+
+        Plataforma *-- Usuario : "contiene"
+        Plataforma *-- Habitacion : "contiene"
+        Plataforma *-- Solicitud : "contiene"
+        Propietario *-- Habitacion : "es dueño de"
+        Propietario *-- Publicacion : "publica"
+        Estudiante *-- Solicitud : "realiza"
+
+    ' ==================================================
+
+        Publicacion o-- Habitacion : "referencia"
+        Solicitud o-- Publicacion : "sobre"
+
+@enduml

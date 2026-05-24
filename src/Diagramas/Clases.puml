@@ -1,0 +1,52 @@
+@startuml
+
+'======================
+' CLASES
+'======================
+
+class Plataforma
+
+abstract Usuario
+
+class Estudiante
+class Propietario
+
+class Habitacion
+class Publicacion
+class Solicitud
+
+'======================
+' RELACIONES
+'======================
+
+'======================
+' HERENCIA
+'======================
+
+Usuario <|-- Estudiante
+
+Usuario <|-- Propietario
+
+'======================
+' COMPOSICION
+'======================
+
+Propietario "1" *-- "0..*" Publicacion
+
+Publicacion "1" --* "1" Habitacion
+
+Plataforma "1" *-- "0..*" Usuario
+
+Plataforma "1" *-- "0..*" Solicitud
+
+Plataforma "1" *-- "0..*" Publicacion
+
+'======================
+' AGREGACION
+'======================
+
+Estudiante "1" o-- "1" Solicitud
+
+Publicacion "1" o-- "1" Solicitud
+ 
+@enduml
