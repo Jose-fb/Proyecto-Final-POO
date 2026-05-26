@@ -1,10 +1,14 @@
 @startuml
 
   package Vista{
-
-    class FormEstudiante
-    class FormPropietario
-    class FormUsuario
+        
+    class VistaMain
+    class VistaLogin
+    class VistaEstudiante
+    class VistaPropietario
+    class VistaHabitacion
+    class vistaPublicacion
+    class VistaSolicitud
 
   }
 
@@ -55,7 +59,7 @@
 
   }
 
-    Vista ...> Control
+    Vista ....> Control
     Control ...> Modelo
 
     '======================
